@@ -1,18 +1,12 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 
-const dummyReducer = (state = {}, action = {}) => {
-    const { type, payload } = action;
+import signUpReducer from '../container/SignUp/ducks';
 
-    switch (type) {
-        case 'DUMMY':
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
-};
-
-const rootReducer = combineReducers({
-    dummyReducer,
-});
+const rootReducer = (history) =>
+    combineReducers({
+        router: connectRouter(history),
+        signUpReducer,
+    });
 
 export default rootReducer;

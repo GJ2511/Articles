@@ -1,12 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function SignIn() {
     return (
         <div className="row">
             <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div className="card card-signin my-5 bg-light ">
-                    <div className="card-body">
+                    <div className="card-header">
                         <h5 className="card-title text-center">Sign In</h5>
+                    </div>
+                    <div className="card-body">
                         <form>
                             <div className="form-group">
                                 <input
@@ -30,6 +33,9 @@ function SignIn() {
                                 Login
                             </button>
                         </form>
+                    </div>
+                    <div className="card-footer">
+                        Do not have an account? <Link to="/signup"> Sign Up</Link>
                     </div>
                 </div>
             </div>

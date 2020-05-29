@@ -1,5 +1,7 @@
-/* eslint-disable require-yield */
+import { all } from 'redux-saga/effects';
+import { signUpSaga } from '../container/SignUp/ducks';
+
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
-    console.log('Hello rootSaga!');
+    yield all([signUpSaga()]);
 }

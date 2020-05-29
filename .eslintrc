@@ -50,7 +50,10 @@
                 "next": ["const", "let", "var"]
             }
         ],
-        "no-prototype-builtins": 0
+        "no-prototype-builtins": 0,
+        "prettier/prettier": ["error", {
+            "endOfLine":"auto"
+        }]
     },
     "settings": {
         "react": {

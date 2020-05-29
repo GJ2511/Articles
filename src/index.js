@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { ConnectedRouter as Router } from 'connected-react-router';
 import * as serviceWorker from './serviceWorker';
 
 import { store } from './store';
+import historyService from './services/historyService';
 import './index.css';
 import App from './App';
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router history={historyService.history}>
             <App />
         </Router>
     </Provider>,

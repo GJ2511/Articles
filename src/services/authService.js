@@ -1,4 +1,4 @@
-import { LOGIN_URL } from './constant';
+import { LOGIN_URL, USERS_URL } from './constant';
 const headers = {
     'Content-Type': 'application/json;charset=utf-8',
 };
@@ -19,6 +19,21 @@ class AuthService {
 
                 // return response.data;
             });
+    }
+
+    async signup(payload) {
+        let response = await fetch(USERS_URL, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ user: payload }),
+        });
+        let result = await response.json();
+
+        return result;
+    }
+
+    setLoggedInUser(user) {
+        localStorage.setItem('user', JSON.stringify(user));
     }
 
     logout() {
