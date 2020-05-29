@@ -15,7 +15,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
 );
 
 ProtectedRoute.propTypes = {
-    component: PropTypes.objectOf(PropTypes.element),
+    component: PropTypes.func,
 };
 
 const PublicRoute = ({ component: Component, ...rest }) => (
@@ -26,7 +26,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
 );
 
 PublicRoute.propTypes = {
-    component: PropTypes.objectOf(PropTypes.element),
+    component: PropTypes.func,
 };
 
 function Routes({ loggedInUser }) {

@@ -5,9 +5,9 @@ import { NavLink } from 'react-router-dom';
 function Nav({ loggedInUser }) {
     return (
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">
+            <NavLink className="nav-link" to="/" exact strict>
                 Articles Demo Application
-            </a>
+            </NavLink>
             <button
                 className="navbar-toggler"
                 type="button"
