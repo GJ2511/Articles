@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Routes from './Routes';
-import Nav from './component/Nav';
+import NavContainer from './container/Nav/NavContainer';
 
 function App() {
     return (
         <>
-            <Nav />
+            <NavContainer />
 
             <div className="container container-fluid">
                 <Routes />

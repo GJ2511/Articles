@@ -1,7 +1,7 @@
-import { takeLatest, put, call, delay } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 
 import AuthService from '../../services/authService';
-import historyService from '../../services/historyService';
+import { setSignInSuccess } from '../../ducks';
 
 const PREFIX = 'SIGN_UP';
 const SIGN_UP_REQUESTED = `${PREFIX}//SIGN_UP_REQUESTED`;
@@ -47,9 +47,7 @@ function* signUp({ payload: { username, email, password } }) {
             yield put({ type: SIGN_UP_FAILED, payload: response.errors });
         } else {
             yield put({ type: SIGN_UP_SUCCESS });
-            yield call([AuthService, 'setLoggedInUser'], response.user);
-            yield delay(500);
-            yield call([historyService, 'forwardTo'], '/article');
+            yield put(setSignInSuccess(response.user));
         }
     } catch (error) {
         yield put({

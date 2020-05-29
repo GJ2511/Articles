@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-function Nav({ loggedInUser }) {
+function Nav({ isAuthenticated }) {
     return (
         <nav className="navbar navbar-expand navbar-dark bg-dark">
             <NavLink className="nav-link" to="/" exact strict>
@@ -22,7 +22,7 @@ function Nav({ loggedInUser }) {
 
             <div className="collapse navbar-collapse" id="navbarsExample02">
                 <ul className="navbar-nav ml-auto">
-                    {loggedInUser ? (
+                    {isAuthenticated ? (
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/signout">
                                 Sign Out{' '}
@@ -49,7 +49,7 @@ function Nav({ loggedInUser }) {
 }
 
 Nav.propTypes = {
-    loggedInUser: PropTypes.object,
+    isAuthenticated: PropTypes.bool,
 };
 
 export default Nav;

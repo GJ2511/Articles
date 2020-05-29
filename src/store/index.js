@@ -6,11 +6,13 @@ import historyService from '../services/historyService';
 import rootSaga from '../sagas';
 import rootReducer from '../reducers';
 
+const devToolEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({});
+const composeEnhancers = devToolEnhancer || compose;
 const sagaMiddleware = createSagaMiddleware();
 const enhancer = [applyMiddleware(routerMiddleware(historyService.history), sagaMiddleware)];
 
 export const configureStore = (initialState = {}) => {
-    const store = createStore(rootReducer(historyService.history), initialState, compose(...enhancer));
+    const store = createStore(rootReducer(historyService.history), initialState, composeEnhancers(...enhancer));
 
     sagaMiddleware.run(rootSaga);
     return store;
