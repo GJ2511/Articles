@@ -6,7 +6,7 @@ import AuthService from './services/authService';
 import ArticleDetails from './component/ArticleDetails';
 import SignUpContainer from './container/SignUp/SignUpContainer';
 import SignInContainer from './container/SignIn/SignInContainer';
-import Articles from './component/Articles';
+import ArticleListContainer from './container/ArticleList/ArticleListContainer';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
@@ -38,7 +38,7 @@ function Routes() {
     return (
         <>
             <Switch>
-                <ProtectedRoute path={['/', '/article']} exact component={Articles} />
+                <ProtectedRoute path={['/', '/article']} exact component={ArticleListContainer} />
                 <PublicRoute path="/signin" component={SignInContainer} />
                 <PublicRoute path="/signup" component={SignUpContainer} />
                 <ProtectedRoute path="/article/{name}" component={ArticleDetails} />
