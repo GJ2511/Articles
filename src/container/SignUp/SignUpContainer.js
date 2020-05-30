@@ -50,10 +50,9 @@ class SignUpContainer extends Component {
                 validateOnBlur={false}
                 validateOnChange={false}
                 onSubmit={this.handleSubmit}
-                render={(props) => {
-                    return <SignUp {...props} isSubmitting={isSubmitting} hasError={error} />;
-                }}
-            />
+            >
+                {(props) => <SignUp {...props} isSubmitting={isSubmitting} hasError={error} />}
+            </Formik>
         );
     }
 }

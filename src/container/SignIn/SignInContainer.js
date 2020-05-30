@@ -45,10 +45,9 @@ class SignInContainer extends Component {
                 validateOnBlur={false}
                 validateOnChange={false}
                 onSubmit={this.handleSubmit}
-                render={(props) => {
-                    return <SignIn {...props} isSubmitting={isSubmitting} hasError={error} />;
-                }}
-            />
+            >
+                {(props) => <SignIn {...props} isSubmitting={isSubmitting} hasError={error} />}
+            </Formik>
         );
     }
 }
