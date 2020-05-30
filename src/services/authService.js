@@ -30,7 +30,7 @@ class AuthService {
         localStorage.setItem('user', JSON.stringify(user));
     }
 
-    logout() {
+    signout() {
         localStorage.removeItem('user');
     }
 
