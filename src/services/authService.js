@@ -4,30 +4,24 @@ const headers = {
 };
 
 class AuthService {
-    login(email, password) {
-        return fetch(LOGIN_URL, {
+    async signin({ email, password }) {
+        const response = await fetch(LOGIN_URL, {
             method: 'POST',
             headers,
-            body: JSON.stringify({ users: { email, password } }),
-        })
-            .then((response) => response.json())
-            .then((response) => {
-                console.log(response);
-                // if (response.data.accessToken) {
-                //     localStorage.setItem("user", JSON.stringify(response.data));
-                // }
+            body: JSON.stringify({ user: { email, password } }),
+        });
+        const result = await response.json();
 
-                // return response.data;
-            });
+        return result;
     }
 
     async signup(payload) {
-        let response = await fetch(USERS_URL, {
+        const response = await fetch(USERS_URL, {
             method: 'POST',
             headers,
             body: JSON.stringify({ user: payload }),
         });
-        let result = await response.json();
+        const result = await response.json();
 
         return result;
     }

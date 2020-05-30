@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import AuthService from './services/authService';
 import ArticleDetails from './component/ArticleDetails';
 import SignUpContainer from './container/SignUp/SignUpContainer';
-import SignIn from './component/SignIn';
+import SignInContainer from './container/SignIn/SignInContainer';
 import Articles from './component/Articles';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
@@ -34,14 +34,14 @@ PublicRoute.propTypes = {
     component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-function Routes({ loggedInUser }) {
+function Routes() {
     return (
         <>
             <Switch>
-                <ProtectedRoute path={['/', '/article']} exact component={Articles} loggedInUser={loggedInUser} />
-                <PublicRoute path="/signin" component={SignIn} loggedInUser={loggedInUser} />
-                <PublicRoute path="/signup" component={SignUpContainer} loggedInUser={loggedInUser} />
-                <ProtectedRoute path="/article/{name}" component={ArticleDetails} loggedInUser={loggedInUser} />
+                <ProtectedRoute path={['/', '/article']} exact component={Articles} />
+                <PublicRoute path="/signin" component={SignInContainer} />
+                <PublicRoute path="/signup" component={SignUpContainer} />
+                <ProtectedRoute path="/article/{name}" component={ArticleDetails} />
                 <Route path="*">
                     <Redirect to="/" />
                 </Route>
@@ -49,9 +49,5 @@ function Routes({ loggedInUser }) {
         </>
     );
 }
-
-Routes.propTypes = {
-    loggedInUser: PropTypes.object,
-};
 
 export default Routes;

@@ -3,27 +3,27 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import AuthService from '../../services/authService';
 import { setSignInSuccess } from '../../ducks';
 
-const PREFIX = 'SIGN_UP';
-const SIGN_UP_REQUESTED = `${PREFIX}//SIGN_UP_REQUESTED`;
-const SIGN_UP_SUCCESS = `${PREFIX}//SIGN_UP_SUCCESS`;
-const SIGN_UP_FAILED = `${PREFIX}//SIGN_UP_FAILED`;
+const PREFIX = 'SIGN_IN';
+const SIGN_IN_REQUESTED = `${PREFIX}//SIGN_IN_REQUESTED`;
+const SIGN_IN_SUCCESS = `${PREFIX}//SIGN_IN_SUCCESS`;
+const SIGN_IN_FAILED = `${PREFIX}//SIGN_IN_FAILED`;
 
 const initialState = {
     isSubmitting: false,
     error: {},
 };
 
-const signUpReducer = (state = initialState, action = {}) => {
+const signInReducer = (state = initialState, action = {}) => {
     const { type, payload } = action;
 
     switch (type) {
-        case SIGN_UP_REQUESTED:
+        case SIGN_IN_REQUESTED:
             return {
                 ...state,
                 isSubmitting: true,
                 error: {},
             };
-        case SIGN_UP_FAILED:
+        case SIGN_IN_FAILED:
             return {
                 ...state,
                 isSubmitting: false,
@@ -34,24 +34,24 @@ const signUpReducer = (state = initialState, action = {}) => {
     }
 };
 
-export const signUpRequested = (values) => ({
-    type: SIGN_UP_REQUESTED,
+export const signInRequested = (values) => ({
+    type: SIGN_IN_REQUESTED,
     payload: values,
 });
 
-function* signUp({ payload: { username, email, password } }) {
+function* signIn({ payload: { email, password } }) {
     try {
-        const response = yield call([AuthService, 'signup'], { username, email, password });
+        const response = yield call([AuthService, 'signin'], { email, password });
 
         if (response.errors) {
-            yield put({ type: SIGN_UP_FAILED, payload: response.errors });
+            yield put({ type: SIGN_IN_FAILED, payload: response.errors });
         } else {
-            yield put({ type: SIGN_UP_SUCCESS });
+            yield put({ type: SIGN_IN_SUCCESS });
             yield put(setSignInSuccess(response.user));
         }
     } catch (error) {
         yield put({
-            type: SIGN_UP_FAILED,
+            type: SIGN_IN_FAILED,
             payload: {
                 Error: ['Something went wrong'],
             },
@@ -59,12 +59,12 @@ function* signUp({ payload: { username, email, password } }) {
     }
 }
 
-export function* signUpSaga() {
-    yield takeLatest(SIGN_UP_REQUESTED, signUp);
+export function* signInSaga() {
+    yield takeLatest(SIGN_IN_REQUESTED, signIn);
 }
 
 export const actions = {
-    signUpRequested,
+    signInRequested,
 };
 
-export default signUpReducer;
+export default signInReducer;
