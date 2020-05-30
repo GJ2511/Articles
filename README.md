@@ -9,7 +9,7 @@ For development, you will only need Node.js v12.17.0 installed on your environem
 ## Installation and Setup Instructions
 
     $ git clone https://github.com/GJ2511/Articles.git
-    $ cd PROJECT
+    $ cd Articles
     $ npm install
 
 To Start Server:
