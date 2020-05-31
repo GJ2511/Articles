@@ -10,7 +10,7 @@ function FavTag({ handleTagClick, selectedTag, tags, setSeletedTag }) {
 
     return tags.map((tag, index) => {
         const selected = tag === selectedTag ? true : false;
-        const classes = cx('badge ml-1', {
+        const classes = cx('badge ml-1 hover-hand', {
             'badge-secondary': !selected,
             'badge-primary': selected,
         });

@@ -5,6 +5,7 @@ import applicationReducer from '../ducks';
 import signUpReducer from '../container/SignUp/ducks';
 import signInReducer from '../container/SignIn/ducks';
 import favTagReducer from '../container/FavTag/ducks';
+import articleListReducer from '../container/ArticleList/ducks';
 
 const rootReducer = (history) =>
     combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = (history) =>
         signUpReducer,
         signInReducer,
         favTagReducer,
+        articleListReducer,
     });
 
 export default rootReducer;

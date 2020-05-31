@@ -19,7 +19,7 @@ class FavTagContainer extends Component {
                 <div className="card-header">
                     <h5 className="card-title text-center">Favorite Tags</h5>
                 </div>
-                <div className="card-body bg-white">{loading ? <Loader {...rest} /> : <FavTag {...rest} />}</div>
+                <div className="card-body bg-white">{loading ? <Loader /> : <FavTag {...rest} />}</div>
             </div>
         );
     }
