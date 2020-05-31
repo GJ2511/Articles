@@ -24,9 +24,9 @@ function Nav({ isAuthenticated, signOutRequested }) {
                 <ul className="navbar-nav ml-auto">
                     {isAuthenticated ? (
                         <li className="nav-item">
-                            <a href="#" className="nav-link" onClick={signOutRequested}>
+                            <span href="#" className="nav-link" onClick={signOutRequested}>
                                 Sign Out{' '}
-                            </a>
+                            </span>
                         </li>
                     ) : (
                         <>

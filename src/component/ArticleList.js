@@ -25,8 +25,8 @@ function ArticleList({ articles, loading, handleRowClick }) {
                 <td className="col-2">{article.title}</td>
                 <td className="col-3">{article.description}</td>
                 <td className="col-2">{article.author.username}</td>
-                <td className="col-1">{getTags(article.tagList)}</td>
-                <td className="col-2">
+                <td className="col-2">{getTags(article.tagList)}</td>
+                <td className="col-1">
                     <button type="button" className="btn btn-primary rounded-pill">
                         <svg
                             className="bi bi-heart-fill"
@@ -56,8 +56,8 @@ function ArticleList({ articles, loading, handleRowClick }) {
                     <th className="col-2">Title</th>
                     <th className="col-3">Description</th>
                     <th className="col-2">Author</th>
-                    <th className="col-1">Tags</th>
-                    <th className="col-2">Favorites Count</th>
+                    <th className="col-2">Tags</th>
+                    <th className="col-1">Favorites Count</th>
                     <th className="col-2">Created At</th>
                 </tr>
             </thead>

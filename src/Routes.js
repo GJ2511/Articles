@@ -7,6 +7,8 @@ import ArticleDetails from './component/ArticleDetails';
 import SignUpContainer from './container/SignUp/SignUpContainer';
 import SignInContainer from './container/SignIn/SignInContainer';
 import ArticleListContainer from './container/ArticleList/ArticleListContainer';
+import CreateArticle from './container/Article/CreateArticle';
+import EditArticle from './container/Article/EditArticle';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
@@ -39,6 +41,8 @@ function Routes() {
         <>
             <Switch>
                 <ProtectedRoute path={['/', '/article']} exact component={ArticleListContainer} />
+                <ProtectedRoute path={'/new/article'} exact component={CreateArticle} />
+                <ProtectedRoute path={'/edit/article'} exact component={EditArticle} />
                 <PublicRoute path="/signin" component={SignInContainer} />
                 <PublicRoute path="/signup" component={SignUpContainer} />
                 <ProtectedRoute path="/article/{name}" component={ArticleDetails} />

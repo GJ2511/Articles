@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import ArtileList from '../../component/ArticleList';
 import ErrorList from '../../component/ErrorList';
 import Pagination from '../../component/Pagination';
+import AddNewBtn from '../../component/AddNewBtn';
 import FavTagContainer from '../FavTag/FavTagContainer';
 import { getArticlesRequested, setCurrentPage } from './ducks';
 
@@ -33,6 +34,7 @@ class ArticleListContainer extends Component {
         return (
             <div className="row mt-5">
                 <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2">
+                    <AddNewBtn />
                     <FavTagContainer handleTagClick={this.onFavTagClick} />
                 </div>
                 <div className="col-sm-12 col-md-9 col-lg-10 col-xl-10">
