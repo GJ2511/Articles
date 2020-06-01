@@ -2,6 +2,7 @@ import { takeLatest, call, put, select } from 'redux-saga/effects';
 import map from 'lodash/map';
 
 import ArticleService from '../../services/articleService';
+import AuthService from '../../services/authService';
 
 const initialState = {
     loading: true,
@@ -9,6 +10,8 @@ const initialState = {
     currentPage: 1,
     totalCount: 0,
     error: false,
+    myFavArticle: false,
+    myArticle: false,
 };
 
 const limit = 20;
@@ -21,6 +24,8 @@ const TOGGLE_FAVORITE = `${PREFIX}//TOGGLE_FAVORITE`;
 const MARK_FAVORITE = `${PREFIX}//MARK_FAVORITE`;
 const UNMARK_FAVORITE = `${PREFIX}//UNMARK_FAVORITE`;
 const SET_CURRENT_PAGE = `${PREFIX}//SET_CURRENT_PAGE`;
+const TOGGLE_MY_FAV_ARTICLE = `${PREFIX}//TOGGLE_MY_FAV_ARTICLE`;
+const TOGGLE_MY_ARTICLE = `${PREFIX}//TOGGLE_MY_ARTICLE`;
 
 const articleListReducer = (state = initialState, action = {}) => {
     const { type, payload } = action;
@@ -75,6 +80,18 @@ const articleListReducer = (state = initialState, action = {}) => {
                 ),
             };
         }
+        case TOGGLE_MY_FAV_ARTICLE: {
+            return {
+                ...state,
+                myFavArticle: payload,
+            };
+        }
+        case TOGGLE_MY_ARTICLE: {
+            return {
+                ...state,
+                myArticle: payload,
+            };
+        }
         default:
             return state;
     }
@@ -92,6 +109,15 @@ export const toggleFavoriteRequested = (payload) => ({
     type: TOGGLE_FAVORITE,
     payload,
 });
+export const toggleMyFavArticle = (payload) => ({
+    type: TOGGLE_MY_FAV_ARTICLE,
+    payload,
+});
+export const toggleMyArticle = (payload) => ({
+    type: TOGGLE_MY_ARTICLE,
+    payload,
+});
+
 export const getState = (state) => state;
 
 function* getArticles({ payload }) {
@@ -103,6 +129,8 @@ function* getArticles({ payload }) {
             limit,
             offset: resetPage ? 0 : (articleListReducer.currentPage - 1) * limit,
             ...(favTagReducer.selectedTag && { tag: favTagReducer.selectedTag }),
+            ...(articleListReducer.myArticle && { author: AuthService.getLoggedInUser().username }),
+            ...(articleListReducer.myFavArticle && { favorited: AuthService.getLoggedInUser().username }),
         };
 
         const response = yield call([ArticleService, 'getArticles'], params);

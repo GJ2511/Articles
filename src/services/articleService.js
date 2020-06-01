@@ -6,13 +6,19 @@ const headers = {
 
 class ArticleService {
     async getArticles(params = {}) {
+        const loggedInUser = AuthService.getLoggedInUser();
         let url = `${ARTICLE_URL}?`;
 
         for (const param in params) {
             url += `${param}=${params[param]}&`;
         }
 
-        const response = await fetch(url, { headers });
+        const requestHeaders = {
+            ...headers,
+            ...(loggedInUser && { Authorization: `Token ${loggedInUser.token}` }),
+        };
+
+        const response = await fetch(url, { headers: requestHeaders });
         const result = await response.json();
 
         return result;
