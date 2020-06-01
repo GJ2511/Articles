@@ -21,6 +21,11 @@ const applicationReducer = (state = initialState, action = {}) => {
                 ...state,
                 authenticated: true,
             };
+        case SIGN_OUT_REQUESTED:
+            return {
+                ...state,
+                authenticated: false,
+            };
         default:
             return state;
     }
@@ -28,7 +33,7 @@ const applicationReducer = (state = initialState, action = {}) => {
 
 function* signIn({ payload }) {
     yield call([authService, 'setLoggedInUser'], payload);
-    yield call([historyService, 'forwardTo'], '/article');
+    yield call([historyService, 'forwardTo'], '/');
 }
 
 function* signOut() {

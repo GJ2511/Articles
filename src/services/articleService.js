@@ -50,6 +50,30 @@ class ArticleService {
 
         return result;
     }
+
+    async markArticleFav(slug) {
+        let url = `${ARTICLE_URL}/${slug}/favorite`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { ...headers, Authorization: `Token ${AuthService.getLoggedInUser().token}` },
+        });
+        const result = await response.json();
+
+        return result;
+    }
+
+    async unmarkArticleFav(slug) {
+        let url = `${ARTICLE_URL}/${slug}/favorite`;
+
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: { ...headers, Authorization: `Token ${AuthService.getLoggedInUser().token}` },
+        });
+        const result = await response.json();
+
+        return result;
+    }
 }
 
 export default new ArticleService();

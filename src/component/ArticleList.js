@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import Loader from './Loader';
 
-function ArticleList({ articles, loading, handleRowClick }) {
+function ArticleList({ articles, loading, handleRowClick, handleFavCellClick }) {
     if (loading) {
         return <Loader />;
     }
@@ -21,12 +21,20 @@ function ArticleList({ articles, loading, handleRowClick }) {
 
     const tableBody = articles.map((article, index) => {
         return (
-            <tr key={index} onClick={() => handleRowClick(article.slug)} className="d-flex hover-hand">
-                <td className="col-2">{article.title}</td>
-                <td className="col-3">{article.description}</td>
-                <td className="col-2">{article.author.username}</td>
-                <td className="col-2">{getTags(article.tagList)}</td>
-                <td className="col-1">
+            <tr key={index} className="d-flex hover-hand">
+                <td className="col-2" onClick={() => handleRowClick(article.slug)}>
+                    {article.title}
+                </td>
+                <td className="col-3" onClick={() => handleRowClick(article.slug)}>
+                    {article.description}
+                </td>
+                <td className="col-2" onClick={() => handleRowClick(article.slug)}>
+                    {article.author.username}
+                </td>
+                <td className="col-2" onClick={() => handleRowClick(article.slug)}>
+                    {getTags(article.tagList)}
+                </td>
+                <td className="col-1" onClick={() => handleFavCellClick(article)}>
                     <button type="button" className="btn btn-primary rounded-pill">
                         <svg
                             className="bi bi-heart-fill"
@@ -44,13 +52,15 @@ function ArticleList({ articles, loading, handleRowClick }) {
                         <span className="badge badge-light">{article.favoritesCount}</span>
                     </button>
                 </td>
-                <td className="col-2">{moment(article.createdAt).format('dddd, MMMM Do YYYY')}</td>
+                <td className="col-2" onClick={() => handleRowClick(article.slug)}>
+                    {moment(article.createdAt).format('dddd, MMMM Do YYYY')}
+                </td>
             </tr>
         );
     });
 
     return (
-        <table className="table table-hover table-bordered table-responsive article_list">
+        <table className="table table-hover table-bordered article_list">
             <thead className="thead-dark">
                 <tr className="d-flex">
                     <th className="col-2">Title</th>
@@ -68,6 +78,7 @@ function ArticleList({ articles, loading, handleRowClick }) {
 
 ArticleList.propTypes = {
     articles: PropTypes.array.isRequired,
+    handleFavCellClick: PropTypes.func.isRequired,
     handleRowClick: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
 };

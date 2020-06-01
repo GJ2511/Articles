@@ -7,7 +7,7 @@ import ErrorList from '../../component/ErrorList';
 import Pagination from '../../component/Pagination';
 import AddNewBtn from '../../component/AddNewBtn';
 import FavTagContainer from '../FavTag/FavTagContainer';
-import { getArticlesRequested, setCurrentPage } from './ducks';
+import { getArticlesRequested, setCurrentPage, toggleFavoriteRequested } from './ducks';
 
 import historyService from '../../services/historyService';
 
@@ -18,6 +18,16 @@ class ArticleListContainer extends Component {
 
     onFavTagClick = () => {
         this.props.getArticlesRequested({ resetPage: true });
+    };
+
+    onFavCellClick = ({ slug, favorited }) => {
+        const { authenticated, toggleFavoriteRequested } = this.props;
+
+        if (!authenticated) {
+            historyService.forwardTo(`/signin`);
+        } else {
+            toggleFavoriteRequested({ slug, favorited });
+        }
     };
 
     onRowClick = (slug) => {
@@ -43,7 +53,12 @@ class ArticleListContainer extends Component {
                         <ErrorList errors={{ ERROR: ['Something Went Wrong'] }} />
                     ) : (
                         <>
-                            <ArtileList {...rest} handleRowClick={this.onRowClick} loading={loading} />
+                            <ArtileList
+                                {...rest}
+                                handleRowClick={this.onRowClick}
+                                loading={loading}
+                                handleFavCellClick={this.onFavCellClick}
+                            />
                             <Pagination
                                 totalCount={totalCount}
                                 currentPage={currentPage}
@@ -60,20 +75,25 @@ class ArticleListContainer extends Component {
 
 ArticleListContainer.propTypes = {
     articles: PropTypes.array.isRequired,
+    authenticated: PropTypes.bool.isRequired,
     currentPage: PropTypes.number.isRequired,
     error: PropTypes.bool.isRequired,
     getArticlesRequested: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     setCurrentPage: PropTypes.func.isRequired,
+    toggleFavoriteRequested: PropTypes.func.isRequired,
     totalCount: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ articleListReducer }) => ({
+const mapStateToProps = ({ articleListReducer, applicationReducer }) => ({
     articles: articleListReducer.articles,
+    authenticated: applicationReducer.authenticated,
     currentPage: articleListReducer.currentPage,
     error: articleListReducer.error,
     loading: articleListReducer.loading,
     totalCount: articleListReducer.totalCount,
 });
 
-export default connect(mapStateToProps, { getArticlesRequested, setCurrentPage })(ArticleListContainer);
+export default connect(mapStateToProps, { getArticlesRequested, setCurrentPage, toggleFavoriteRequested })(
+    ArticleListContainer
+);
