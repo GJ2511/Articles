@@ -9,6 +9,8 @@ import AddNewBtn from '../../component/AddNewBtn';
 import FavTagContainer from '../FavTag/FavTagContainer';
 import { getArticlesRequested, setCurrentPage } from './ducks';
 
+import historyService from '../../services/historyService';
+
 class ArticleListContainer extends Component {
     componentDidMount() {
         this.props.getArticlesRequested();
@@ -19,8 +21,7 @@ class ArticleListContainer extends Component {
     };
 
     onRowClick = (slug) => {
-        //HANDLE ROW CLICK HERE
-        console.log(slug);
+        historyService.forwardTo(`/article/${slug}`);
     };
 
     onPageClick = (page) => {

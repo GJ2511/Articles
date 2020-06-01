@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 function Nav({ isAuthenticated, signOutRequested }) {
     return (
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <NavLink className="nav-link" to="/" exact strict>
+        <nav className="navbar navbar-expand navbar-dark bg-info">
+            <NavLink className="nav-link text-white" to="/" exact strict>
                 Articles Demo Application
             </NavLink>
             <button
@@ -21,13 +21,20 @@ function Nav({ isAuthenticated, signOutRequested }) {
             </button>
 
             <div className="collapse navbar-collapse" id="navbarsExample02">
-                <ul className="navbar-nav ml-auto">
+                <ul className="navbar-nav ml-auto text-white">
                     {isAuthenticated ? (
-                        <li className="nav-item">
-                            <span href="#" className="nav-link" onClick={signOutRequested}>
-                                Sign Out{' '}
-                            </span>
-                        </li>
+                        <>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/new/article">
+                                    Create New Article{' '}
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <span href="#" className="nav-link" onClick={signOutRequested}>
+                                    Sign Out{' '}
+                                </span>
+                            </li>
+                        </>
                     ) : (
                         <>
                             <li className="nav-item">

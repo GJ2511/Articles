@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
@@ -6,26 +7,37 @@ import { connect } from 'react-redux';
 import ArticleForm from '../../component/ArticleForm';
 import Loader from '../../component/Loader';
 import { handleArticleFormValidation } from './helper.js';
-import { createArticle, reset } from './ducks';
+import { updateArticleRequest, reset, getArticleRequest } from './ducks';
 
-const initialValues = {
-    title: '',
-    description: '',
-    body: '',
-    tagList: [],
-};
+class EditArticleContainer extends Component {
+    componentDidMount() {
+        const {
+            match: {
+                params: { slug },
+            },
+            getArticleRequest,
+        } = this.props;
 
-class CreateArticle extends Component {
-    handleSubmit = (values) => {
-        this.props.createArticle(values);
-    };
+        getArticleRequest(slug);
+    }
 
     componentWillUnmount() {
         this.props.reset();
     }
 
+    handleSubmit = ({ body, description, title, tagList }) => {
+        const {
+            match: {
+                params: { slug },
+            },
+            updateArticleRequest,
+        } = this.props;
+
+        updateArticleRequest({ body, description, title, tagList }, slug);
+    };
+
     render() {
-        const { error, loading, successMsg } = this.props;
+        const { article, error, loading, successMsg } = this.props;
 
         if (loading) {
             return (
@@ -45,31 +57,34 @@ class CreateArticle extends Component {
 
         return (
             <Formik
-                initialValues={initialValues}
+                initialValues={article}
                 // eslint-disable-next-line react/jsx-handler-names
                 validate={handleArticleFormValidation}
-                validateOnBlur={false}
-                validateOnChange={false}
+                validateOnBlur={true}
+                validateOnChange={true}
                 onSubmit={this.handleSubmit}
             >
-                {(props) => <ArticleForm {...props} hasError={error} />}
+                {(props) => <ArticleForm {...props} isSubmitting={loading} hasError={error} />}
             </Formik>
         );
     }
 }
 
-CreateArticle.propTypes = {
-    createArticle: PropTypes.func.isRequired,
+EditArticleContainer.propTypes = {
+    article: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
+    getArticleRequest: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     reset: PropTypes.func.isRequired,
     successMsg: PropTypes.string.isRequired,
+    updateArticleRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ articleReducer }) => ({
+    article: articleReducer.article,
     error: articleReducer.error,
     loading: articleReducer.loading,
     successMsg: articleReducer.successMsg,
 });
 
-export default connect(mapStateToProps, { createArticle, reset })(CreateArticle);
+export default connect(mapStateToProps, { updateArticleRequest, reset, getArticleRequest })(EditArticleContainer);
