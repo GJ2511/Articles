@@ -41,11 +41,14 @@ function Routes() {
         <>
             <Switch>
                 <ProtectedRoute path={['/', '/article']} exact component={ArticleListContainer} />
-                <ProtectedRoute path={'/new/article'} exact component={CreateArticle} />
-                <ProtectedRoute path={'/edit/article'} exact component={EditArticle} />
+                <ProtectedRoute path="/new/article" exact component={CreateArticle} />
+                <ProtectedRoute path="/edit/article/:slug" component={EditArticle} />
+                <ProtectedRoute path="/article/{name}" component={ArticleDetails} />
                 <PublicRoute path="/signin" component={SignInContainer} />
                 <PublicRoute path="/signup" component={SignUpContainer} />
-                <ProtectedRoute path="/article/{name}" component={ArticleDetails} />
+                <Route exact path="/article/{slug}">
+                    <div> ARTICLE DETAIL </div>
+                </Route>
                 <Route path="*">
                     <Redirect to="/" />
                 </Route>

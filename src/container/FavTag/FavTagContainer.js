@@ -17,7 +17,7 @@ class FavTagContainer extends Component {
         return (
             <div className="card card-signin bg-light">
                 <div className="card-header">
-                    <h5 className="card-title text-center">Favorite Tags</h5>
+                    <h5 className="card-title text-center">Popular Tags</h5>
                 </div>
                 <div className="card-body bg-white">{loading ? <Loader /> : <FavTag {...rest} />}</div>
             </div>

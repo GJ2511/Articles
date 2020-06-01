@@ -21,9 +21,31 @@ class ArticleService {
     async createArticle(payload) {
         const response = await fetch(ARTICLE_URL, {
             method: 'POST',
-            headers: { ...headers, Authorization: `TOKEN ${AuthService.getLoggedInUser().token}` },
+            headers: { ...headers, Authorization: `Token ${AuthService.getLoggedInUser().token}` },
             body: JSON.stringify({ article: payload }),
         });
+        const result = await response.json();
+
+        return result;
+    }
+
+    async updateArticle({ values, slug }) {
+        let url = `${ARTICLE_URL}/${slug}`;
+
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: { ...headers, Authorization: `Token ${AuthService.getLoggedInUser().token}` },
+            body: JSON.stringify({ article: values }),
+        });
+        const result = await response.json();
+
+        return result;
+    }
+
+    async getArticle(slug) {
+        let url = `${ARTICLE_URL}/${slug}`;
+
+        const response = await fetch(url, { headers });
         const result = await response.json();
 
         return result;

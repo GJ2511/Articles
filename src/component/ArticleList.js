@@ -50,7 +50,7 @@ function ArticleList({ articles, loading, handleRowClick }) {
     });
 
     return (
-        <table className="table table-hover table-bordered">
+        <table className="table table-hover table-bordered table-responsive article_list">
             <thead className="thead-dark">
                 <tr className="d-flex">
                     <th className="col-2">Title</th>

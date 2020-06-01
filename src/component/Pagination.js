@@ -22,7 +22,7 @@ function Pagination({ totalCount, currentPage, loading, handlePageClick }) {
     });
 
     return (
-        <nav aria-label="Page navigation">
+        <nav aria-label="Page navigation" className="table-responsive">
             <ul className="pagination">{pages}</ul>
         </nav>
     );

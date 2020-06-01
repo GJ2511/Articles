@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ArticleForm from '../../component/ArticleForm';
 import Loader from '../../component/Loader';
 import { handleArticleFormValidation } from './helper.js';
-import { createArticle } from './ducks';
+import { createArticle, reset } from './ducks';
 
 const initialValues = {
     title: '',
@@ -20,16 +20,24 @@ class CreateArticle extends Component {
         this.props.createArticle(values);
     };
 
+    componentWillUnmount() {
+        this.props.reset();
+    }
+
     render() {
         const { error, loading, successMsg } = this.props;
 
         if (loading) {
-            return <Loader />;
+            return (
+                <div className="mt-5">
+                    <Loader />
+                </div>
+            );
         }
 
         if (successMsg.length) {
             return (
-                <div className="alert alert-primary" role="alert">
+                <div className="alert alert-primary mt-5" role="alert">
                     {successMsg}
                 </div>
             );
@@ -54,6 +62,7 @@ CreateArticle.propTypes = {
     createArticle: PropTypes.func.isRequired,
     error: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
+    reset: PropTypes.func.isRequired,
     successMsg: PropTypes.string.isRequired,
 };
 
@@ -63,4 +72,4 @@ const mapStateToProps = ({ articleReducer }) => ({
     successMsg: articleReducer.successMsg,
 });
 
-export default connect(mapStateToProps, { createArticle })(CreateArticle);
+export default connect(mapStateToProps, { createArticle, reset })(CreateArticle);

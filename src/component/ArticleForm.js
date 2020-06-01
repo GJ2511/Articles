@@ -7,6 +7,10 @@ import ErrorList from './ErrorList';
 function TagFormInput(props) {
     const [field] = useField(props);
 
+    if (field.value.tagList === undefined) {
+        return null;
+    }
+
     const handleKeyPress = (e) => {
         const value = e.target.value.trim();
 
