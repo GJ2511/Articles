@@ -9,7 +9,7 @@ import Loader from '../../component/Loader';
 import ErrorList from '../../component/ErrorList';
 import Article from '../../component/Article';
 
-import { reset, getArticleRequest, toggleFavoriteRequested } from './ducks';
+import { reset, getArticleRequest, toggleFavoriteRequested, deleteRequested } from './ducks';
 import historyService from '../../services/historyService';
 
 class ArticleContainer extends Component {
@@ -43,7 +43,14 @@ class ArticleContainer extends Component {
     };
 
     onDeleteClick = () => {
-        console.log('onDeleteClick');
+        const {
+            match: {
+                params: { slug },
+            },
+            deleteRequested,
+        } = this.props;
+console.log("ondeleteclick")
+        deleteRequested(slug);
     };
 
     redirectToSign = () => {
@@ -111,6 +118,7 @@ ArticleContainer.propTypes = {
     article: PropTypes.object.isRequired,
     authenticated: PropTypes.bool.isRequired,
     currentUser: PropTypes.object.isRequired,
+    deleteRequested: PropTypes.func.isRequired,
     error: PropTypes.object.isRequired,
     getArticleRequest: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -130,5 +138,5 @@ const mapStateToProps = ({ articleReducer, applicationReducer }) => ({
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { reset, getArticleRequest, toggleFavoriteRequested })
+    connect(mapStateToProps, { reset, getArticleRequest, toggleFavoriteRequested, deleteRequested })
 )(ArticleContainer);

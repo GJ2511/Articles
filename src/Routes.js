@@ -55,11 +55,8 @@ function Routes() {
                 <Route exact path="/article/{slug}">
                     <div> ARTICLE DETAIL </div>
                 </Route>
-                <Route path="/404">
-                    <NotFound />
-                </Route>
                 <Route path="*">
-                    <Redirect to="/" />
+                    <NotFound />
                 </Route>
             </Switch>
         </>

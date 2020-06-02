@@ -22,6 +22,7 @@ const CREATE_ARTICLE_ERROR = `${PREFIX}//CREATE_ARTICLE_ERROR`;
 const TOGGLE_FAVORITE_REQUESTED = `${PREFIX}//TOGGLE_FAVORITE_REQUESTED`;
 const TOGGLE_FAVORITE_SUCCESS = `${PREFIX}//TOGGLE_FAVORITE_SUCCESS`;
 const TOGGLE_FAVORITE_ERROR = `${PREFIX}//TOGGLE_FAVORITE_ERROR`;
+const DELETE_REQUESTED = `${PREFIX}//DELETE_REQUESTED`;
 const RESET = `${PREFIX}//RESET`;
 
 const articleReducer = (state = initialState, action = {}) => {
@@ -50,7 +51,8 @@ const articleReducer = (state = initialState, action = {}) => {
                 loading: false,
                 error: payload,
             };
-        case TOGGLE_FAVORITE_REQUESTED: {
+        case TOGGLE_FAVORITE_REQUESTED:
+        case DELETE_REQUESTED: {
             return { ...state, requesting: true };
         }
         case TOGGLE_FAVORITE_SUCCESS: {
@@ -81,6 +83,10 @@ export const createArticle = (values) => ({ type: CREATE_ARTICLE_REQUESTED, payl
 export const updateArticleRequest = (values, slug) => ({ type: UPDATE_ARTICLE_REQUESTED, payload: { values, slug } });
 export const toggleFavoriteRequested = (payload) => ({
     type: TOGGLE_FAVORITE_REQUESTED,
+    payload,
+});
+export const deleteRequested = (payload) => ({
+    type: DELETE_REQUESTED,
     payload,
 });
 export const reset = () => ({ type: RESET });
@@ -167,11 +173,17 @@ function* toggleFavorite({ payload: { slug, favorited } }) {
     }
 }
 
+function* deleteArticle({payload}) {
+    yield call([ArticleService, 'deleteArticle'], payload);
+    yield call([historyService, 'forwardTo'], `/`);
+}
+
 export function* articleSaga() {
     yield takeLatest(CREATE_ARTICLE_REQUESTED, postArticle);
     yield takeLatest(UPDATE_ARTICLE_REQUESTED, updateArticle);
     yield takeLatest(GET_ARTICLE_REQUESTED, getArticle);
     yield takeLatest(TOGGLE_FAVORITE_REQUESTED, toggleFavorite);
+    yield takeLatest(DELETE_REQUESTED, deleteArticle);
 }
 
 export default articleReducer;
