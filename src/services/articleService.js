@@ -80,6 +80,18 @@ class ArticleService {
 
         return result;
     }
+
+    async deleteArticle(slug) {
+        let url = `${ARTICLE_URL}/${slug}`;
+
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: { ...headers, Authorization: `Token ${AuthService.getLoggedInUser().token}` },
+        });
+        const result = await response.json();
+
+        return result;
+    }
 }
 
 export default new ArticleService();

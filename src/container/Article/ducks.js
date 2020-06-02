@@ -129,7 +129,9 @@ function* getArticle({ payload: slug }) {
     try {
         const response = yield call([ArticleService, 'getArticle'], slug);
 
-        if (response.errors) {
+        if (response.status === '404') {
+            yield call([historyService, 'forwardTo'], `/404`);
+        } else if (response.errors) {
             yield put({ type: GET_ARTICLE_ERROR, payload: response.errors });
         } else {
             yield put({
