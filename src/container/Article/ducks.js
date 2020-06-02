@@ -8,6 +8,7 @@ const initialState = {
     error: {},
     loading: false,
     successMsg: '',
+    requesting: false,
 };
 
 const PREFIX = 'ARTICLE';
@@ -18,6 +19,9 @@ const UPDATE_ARTICLE_REQUESTED = `${PREFIX}//UPDATE_ARTICLE_REQUESTED`;
 const CREATE_ARTICLE_REQUESTED = `${PREFIX}//CREATE_ARTICLE_REQUESTED`;
 const CREATE_ARTICLE_SUCCESS = `${PREFIX}//CREATE_ARTICLE_SUCCESS`;
 const CREATE_ARTICLE_ERROR = `${PREFIX}//CREATE_ARTICLE_ERROR`;
+const TOGGLE_FAVORITE_REQUESTED = `${PREFIX}//TOGGLE_FAVORITE_REQUESTED`;
+const TOGGLE_FAVORITE_SUCCESS = `${PREFIX}//TOGGLE_FAVORITE_SUCCESS`;
+const TOGGLE_FAVORITE_ERROR = `${PREFIX}//TOGGLE_FAVORITE_ERROR`;
 const RESET = `${PREFIX}//RESET`;
 
 const articleReducer = (state = initialState, action = {}) => {
@@ -46,6 +50,21 @@ const articleReducer = (state = initialState, action = {}) => {
                 loading: false,
                 error: payload,
             };
+        case TOGGLE_FAVORITE_REQUESTED: {
+            return { ...state, requesting: true };
+        }
+        case TOGGLE_FAVORITE_SUCCESS: {
+            return {
+                ...state,
+                article: {
+                    ...payload,
+                },
+                requesting: false,
+            };
+        }
+        case TOGGLE_FAVORITE_ERROR: {
+            return { ...state, requesting: false };
+        }
         case RESET:
             return {
                 ...state,
@@ -60,6 +79,10 @@ export const getState = (state) => state && state.articleReducer;
 export const getArticleRequest = (slug) => ({ type: GET_ARTICLE_REQUESTED, payload: slug });
 export const createArticle = (values) => ({ type: CREATE_ARTICLE_REQUESTED, payload: values });
 export const updateArticleRequest = (values, slug) => ({ type: UPDATE_ARTICLE_REQUESTED, payload: { values, slug } });
+export const toggleFavoriteRequested = (payload) => ({
+    type: TOGGLE_FAVORITE_REQUESTED,
+    payload,
+});
 export const reset = () => ({ type: RESET });
 
 function* makeRequest(service, payload, update = false) {
@@ -124,10 +147,29 @@ function* getArticle({ payload: slug }) {
     }
 }
 
+function* toggleFavorite({ payload: { slug, favorited } }) {
+    const service = favorited ? 'unmarkArticleFav' : 'markArticleFav';
+
+    try {
+        const response = yield call([ArticleService, service], slug);
+
+        yield put({
+            type: TOGGLE_FAVORITE_SUCCESS,
+            payload: response.article,
+        });
+    } catch (error) {
+        yield put({
+            type: TOGGLE_FAVORITE_ERROR,
+            payload: favorited,
+        });
+    }
+}
+
 export function* articleSaga() {
     yield takeLatest(CREATE_ARTICLE_REQUESTED, postArticle);
     yield takeLatest(UPDATE_ARTICLE_REQUESTED, updateArticle);
     yield takeLatest(GET_ARTICLE_REQUESTED, getArticle);
+    yield takeLatest(TOGGLE_FAVORITE_REQUESTED, toggleFavorite);
 }
 
 export default articleReducer;

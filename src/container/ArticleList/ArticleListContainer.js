@@ -59,7 +59,7 @@ class ArticleListContainer extends Component {
         const { error, totalCount, currentPage, loading, authenticated, myArticle, myFavArticle, ...rest } = this.props;
 
         return (
-            <div className=" mt-5 container container-fluid">
+            <div className="mt-5 container container-fluid">
                 <div className="row">
                     <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2">
                         <AddNewBtn />

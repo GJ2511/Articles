@@ -10,21 +10,24 @@ const SIGN_OUT_REQUESTED = `${PREFIX}//SIGN_OUT_REQUESTED`;
 
 export const initialState = {
     authenticated: authService.getLoggedInUser() === null ? false : true,
+    currentUser: authService.getLoggedInUser() === null ? {} : authService.getLoggedInUser(),
 };
 
 const applicationReducer = (state = initialState, action = {}) => {
-    const { type } = action;
+    const { type, payload } = action;
 
     switch (type) {
         case SIGN_IN_SUCCESS:
             return {
                 ...state,
                 authenticated: true,
+                currentUser: payload,
             };
         case SIGN_OUT_REQUESTED:
             return {
                 ...state,
                 authenticated: false,
+                currentUser: {},
             };
         default:
             return state;

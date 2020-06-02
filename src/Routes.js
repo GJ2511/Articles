@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import AuthService from './services/authService';
+
+import NotFound from './component/NotFound';
 import SignUpContainer from './container/SignUp/SignUpContainer';
 import SignInContainer from './container/SignIn/SignInContainer';
 import ArticleListContainer from './container/ArticleList/ArticleListContainer';
@@ -45,11 +47,16 @@ function Routes() {
                 </Route>
                 <ProtectedRoute path="/new/article" exact component={CreateArticleContainer} />
                 <ProtectedRoute path="/edit/article/:slug" component={EditArticleContainer} />
-                <ProtectedRoute path="/article/:slug" component={ArticleContainer} />
+                <Route path="/article/:slug">
+                    <ArticleContainer />
+                </Route>
                 <PublicRoute path="/signin" component={SignInContainer} />
                 <PublicRoute path="/signup" component={SignUpContainer} />
                 <Route exact path="/article/{slug}">
                     <div> ARTICLE DETAIL </div>
+                </Route>
+                <Route path="/404">
+                    <NotFound />
                 </Route>
                 <Route path="*">
                     <Redirect to="/" />
