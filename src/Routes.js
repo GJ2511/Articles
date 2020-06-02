@@ -52,9 +52,6 @@ function Routes() {
                 </Route>
                 <PublicRoute path="/signin" component={SignInContainer} />
                 <PublicRoute path="/signup" component={SignUpContainer} />
-                <Route exact path="/article/{slug}">
-                    <div> ARTICLE DETAIL </div>
-                </Route>
                 <Route path="*">
                     <NotFound />
                 </Route>
