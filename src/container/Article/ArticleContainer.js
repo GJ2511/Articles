@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Loader from '../../component/Loader';
 import ErrorList from '../../component/ErrorList';
 import Article from '../../component/Article';
+import CommentContainer from '../Comment/CommentContainer';
 
 import { reset, getArticleRequest, toggleFavoriteRequested, deleteRequested } from './ducks';
 import historyService from '../../services/historyService';
@@ -49,7 +50,7 @@ class ArticleContainer extends Component {
             },
             deleteRequested,
         } = this.props;
-console.log("ondeleteclick")
+
         deleteRequested(slug);
     };
 
@@ -73,7 +74,17 @@ console.log("ondeleteclick")
     }
 
     render() {
-        const { article, error, loading, authenticated, currentUser, requesting } = this.props;
+        const {
+            match: {
+                params: { slug },
+            },
+            article,
+            error,
+            loading,
+            authenticated,
+            currentUser,
+            requesting,
+        } = this.props;
 
         if (authenticated && article.author?.username === currentUser?.username) {
             this.owner = true;
@@ -108,7 +119,9 @@ console.log("ondeleteclick")
                     />
                 </div>
                 <hr />
-                <div className="col-md-12 mt-3">COMMENT SECTION HERE</div>
+                <div className="col-md-12 mt-3">
+                    <CommentContainer slug={slug} />
+                </div>
             </div>
         );
     }

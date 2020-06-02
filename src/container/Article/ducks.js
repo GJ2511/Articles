@@ -173,7 +173,7 @@ function* toggleFavorite({ payload: { slug, favorited } }) {
     }
 }
 
-function* deleteArticle({payload}) {
+function* deleteArticle({ payload }) {
     yield call([ArticleService, 'deleteArticle'], payload);
     yield call([historyService, 'forwardTo'], `/`);
 }
