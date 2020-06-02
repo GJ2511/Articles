@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import cx from 'classnames';
 
 import Loader from './Loader';
 
@@ -19,8 +20,8 @@ function ArticleList({ articles, loading, handleRowClick, handleFavCellClick }) 
         });
     };
 
-    const getFavIcon = (Favorites) => {
-        if (Favorites) {
+    const getFavIcon = (favorites) => {
+        if (favorites) {
             return (
                 <svg
                     className="bi bi-heart-fill"
@@ -56,6 +57,11 @@ function ArticleList({ articles, loading, handleRowClick, handleFavCellClick }) 
     };
 
     const tableBody = articles.map((article, index) => {
+        const classes = cx('btn rounded-pill text-white', {
+            'badge-secondary': !article.favorited,
+            'badge-primary': article.favorited,
+        });
+
         return (
             <tr key={index} className="d-flex hover-hand">
                 <td className="col-2" onClick={() => handleRowClick(article.slug)}>
@@ -71,7 +77,7 @@ function ArticleList({ articles, loading, handleRowClick, handleFavCellClick }) 
                     {getTags(article.tagList)}
                 </td>
                 <td className="col-1" onClick={() => handleFavCellClick(article)}>
-                    <button type="button" className="btn btn-primary rounded-pill text-white">
+                    <button type="button" className={classes}>
                         {getFavIcon(article.favorited)}{' '}
                         <span className="badge badge-light">{article.favoritesCount}</span>
                     </button>

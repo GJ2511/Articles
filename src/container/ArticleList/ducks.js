@@ -122,6 +122,7 @@ export const getState = (state) => state;
 
 function* getArticles({ payload }) {
     try {
+        const loggedInUser = AuthService.getLoggedInUser();
         const { articleListReducer, favTagReducer } = yield select();
         const resetPage = payload && payload.resetPage ? true : false;
 
@@ -129,8 +130,8 @@ function* getArticles({ payload }) {
             limit,
             offset: resetPage ? 0 : (articleListReducer.currentPage - 1) * limit,
             ...(favTagReducer.selectedTag && { tag: favTagReducer.selectedTag }),
-            ...(articleListReducer.myArticle && { author: AuthService.getLoggedInUser().username }),
-            ...(articleListReducer.myFavArticle && { favorited: AuthService.getLoggedInUser().username }),
+            ...(articleListReducer.myArticle && loggedInUser !== null && { author: loggedInUser.username }),
+            ...(articleListReducer.myFavArticle && loggedInUser !== null && { favorited: loggedInUser.username }),
         };
 
         const response = yield call([ArticleService, 'getArticles'], params);
