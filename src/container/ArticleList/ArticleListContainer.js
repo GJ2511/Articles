@@ -59,56 +59,58 @@ class ArticleListContainer extends Component {
         const { error, totalCount, currentPage, loading, authenticated, myArticle, myFavArticle, ...rest } = this.props;
 
         return (
-            <div className="row mt-5">
-                <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2">
-                    <AddNewBtn />
-                    <FavTagContainer handleTagClick={this.onFavTagClick} />
-                    {authenticated && (
-                        <>
-                            <div className="form-check mt-1 mb-1">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    checked={myFavArticle}
-                                    onChange={(e) => this.handleMyFavCheckboxChange(e)}
+            <div className=" mt-5 container container-fluid">
+                <div className="row">
+                    <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2">
+                        <AddNewBtn />
+                        <FavTagContainer handleTagClick={this.onFavTagClick} />
+                        {authenticated && (
+                            <>
+                                <div className="form-check mt-1 mb-1">
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        checked={myFavArticle}
+                                        onChange={(e) => this.handleMyFavCheckboxChange(e)}
+                                    />
+                                    <label className="form-check-label" htmlFor="defaultCheck1">
+                                        My Favorite Article
+                                    </label>
+                                </div>
+                                <div className="form-check mt-1 mb-1">
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        checked={myArticle}
+                                        onChange={(e) => this.handleMyArticleCheckboxChange(e)}
+                                    />
+                                    <label className="form-check-label" htmlFor="defaultCheck1">
+                                        My Article
+                                    </label>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                    <div className="col-sm-12 col-md-9 col-lg-10 col-xl-10">
+                        {error ? (
+                            <ErrorList errors={{ ERROR: ['Something Went Wrong'] }} />
+                        ) : (
+                            <>
+                                <ArtileList
+                                    {...rest}
+                                    handleRowClick={this.onRowClick}
+                                    loading={loading}
+                                    handleFavCellClick={this.onFavCellClick}
                                 />
-                                <label className="form-check-label" htmlFor="defaultCheck1">
-                                    My Favorite Article
-                                </label>
-                            </div>
-                            <div className="form-check mt-1 mb-1">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    checked={myArticle}
-                                    onChange={(e) => this.handleMyArticleCheckboxChange(e)}
+                                <Pagination
+                                    totalCount={totalCount}
+                                    currentPage={currentPage}
+                                    loading={loading}
+                                    handlePageClick={this.onPageClick}
                                 />
-                                <label className="form-check-label" htmlFor="defaultCheck1">
-                                    My Article
-                                </label>
-                            </div>
-                        </>
-                    )}
-                </div>
-                <div className="col-sm-12 col-md-9 col-lg-10 col-xl-10">
-                    {error ? (
-                        <ErrorList errors={{ ERROR: ['Something Went Wrong'] }} />
-                    ) : (
-                        <>
-                            <ArtileList
-                                {...rest}
-                                handleRowClick={this.onRowClick}
-                                loading={loading}
-                                handleFavCellClick={this.onFavCellClick}
-                            />
-                            <Pagination
-                                totalCount={totalCount}
-                                currentPage={currentPage}
-                                loading={loading}
-                                handlePageClick={this.onPageClick}
-                            />
-                        </>
-                    )}
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         );

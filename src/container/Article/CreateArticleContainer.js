@@ -44,16 +44,18 @@ class CreateArticleContainer extends Component {
         }
 
         return (
-            <Formik
-                initialValues={initialValues}
-                // eslint-disable-next-line react/jsx-handler-names
-                validate={handleArticleFormValidation}
-                validateOnBlur={false}
-                validateOnChange={false}
-                onSubmit={this.handleSubmit}
-            >
-                {(props) => <ArticleForm {...props} hasError={error} />}
-            </Formik>
+            <div className="container container-fluid">
+                <Formik
+                    initialValues={initialValues}
+                    // eslint-disable-next-line react/jsx-handler-names
+                    validate={handleArticleFormValidation}
+                    validateOnBlur={false}
+                    validateOnChange={false}
+                    onSubmit={this.handleSubmit}
+                >
+                    {(props) => <ArticleForm {...props} hasError={error} />}
+                </Formik>
+            </div>
         );
     }
 }

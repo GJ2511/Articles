@@ -5,13 +5,11 @@ import NavContainer from './container/Nav/NavContainer';
 
 function App() {
     return (
-        <>
+        <div>
             <NavContainer />
 
-            <div className="container container-fluid">
-                <Routes />
-            </div>
-        </>
+            <Routes />
+        </div>
     );
 }
 
