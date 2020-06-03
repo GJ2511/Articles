@@ -2,6 +2,24 @@
 
 Frontend training assignment for React
 
+### Functionalities implemented
+
+* Sign In
+* Sign Up
+* List Articles
+* Filter Articles by Popular Tags
+* Filter Own Articles (Auth Required)
+* Filter Own Favorite Articles (Auth Required)
+* Create New Article (Auth Required)
+* View Article Detail Page
+* Edit Own Article (Auth Required)
+* Delete Own Article (Auth Required)
+* Mark Article Favorite (Auth Required)
+* View Comments On Article
+* Add Comment On Article (Auth Required)
+* Delete Own Comment On Article (Auth Required)
+* ~~Edit Own Comment On Article~~ (API Unavailable)
+
 ## Requirements
 
 For development, you will only need Node.js v12.17.0 installed on your environement. [Node](http://nodejs.org/) is really easy to install & now include [NPM](https://npmjs.org/).
