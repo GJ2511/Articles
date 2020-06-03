@@ -1,6 +1,6 @@
 ## Articles
 
-Frontend training assignment for React
+Frontend training assignment on React and Redux
 
 ### Functionalities implemented
 
