@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Loader from '../../component/Loader';
 import CommentList from '../../component/CommentList';
-import { getCommentsRequested } from './ducks';
+import { getCommentsRequested, deleteCommentRequested } from './ducks';
 
 class CommentContainer extends Component {
     componentDidMount() {
@@ -13,8 +13,14 @@ class CommentContainer extends Component {
         getCommentsRequested(slug);
     }
 
+    onDeleteComment = (comment) => {
+        const { deleteCommentRequested, slug } = this.props;
+
+        deleteCommentRequested({ comment, slug });
+    };
+
     render() {
-        const { loading, comments } = this.props;
+        const { loading, comments, owner } = this.props;
 
         if (loading) {
             return (
@@ -43,7 +49,11 @@ class CommentContainer extends Component {
                                     </button>
                                     <div className="clearfix"></div>
                                     <hr />
-                                    <CommentList comments={comments} />
+                                    <CommentList
+                                        comments={comments}
+                                        owner={owner}
+                                        handleDeleteComment={this.onDeleteComment}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -56,8 +66,10 @@ class CommentContainer extends Component {
 
 CommentContainer.propTypes = {
     comments: PropTypes.array.isRequired,
+    deleteCommentRequested: PropTypes.func.isRequired,
     getCommentsRequested: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
+    owner: PropTypes.bool.isRequired,
     requesting: PropTypes.bool.isRequired,
     slug: PropTypes.string.isRequired,
 };
@@ -70,4 +82,5 @@ const mapStateToProps = ({ commentReducer }) => ({
 
 export default connect(mapStateToProps, {
     getCommentsRequested,
+    deleteCommentRequested,
 })(CommentContainer);

@@ -30,6 +30,16 @@ class CommentService {
 
         return result;
     }
+
+    async deleteComment({ slug, commentId }) {
+        const response = await fetch(`${ARTICLE_URL}/${slug}/comments/${commentId}`, {
+            method: 'DELETE',
+            headers: { ...headers, Authorization: `Token ${AuthService.getLoggedInUser().token}` },
+        });
+        const result = await response.json();
+
+        return result;
+    }
 }
 
 export default new CommentService();

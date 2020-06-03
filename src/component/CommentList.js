@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-function CommentList({ comments }) {
+function CommentList({ comments, owner, handleDeleteComment }) {
     const getlist = () => {
         return comments.map((comment, index) => {
             return (
-                <li className="media" key={index}>
+                <li className="media border-light border-bottom p-1" key={index}>
                     <a href="#" className="float-left">
-                        <img src={comment.author.image} alt="" className="rounded-circle" />
+                        <img src={comment.author.image} style={{ height: '50px' }} alt="" className="rounded-circle" />
                     </a>
                     <div className="media-body">
                         <span className="text-muted float-right">
@@ -18,6 +18,23 @@ function CommentList({ comments }) {
                         </span>
                         <strong className="text-success">@{comment.author.username}</strong>
                         <p>{comment.body}</p>
+                        {owner && (
+                            <span className="float-right hover-hand" onClick={() => handleDeleteComment(comment)}>
+                                <svg
+                                    className="bi bi-trash-fill"
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"
+                                    />
+                                </svg>
+                            </span>
+                        )}
                     </div>
                 </li>
             );
@@ -29,6 +46,8 @@ function CommentList({ comments }) {
 
 CommentList.propTypes = {
     comments: PropTypes.array.isRequired,
+    handleDeleteComment: PropTypes.func.isRequired,
+    owner: PropTypes.bool.isRequired,
 };
 
 export default CommentList;

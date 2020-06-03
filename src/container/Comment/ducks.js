@@ -14,6 +14,7 @@ const GET_COMMENTS_SUCCESS = `${PREFIX}//GET_COMMENTS_SUCCESS`;
 const GET_COMMENTS_ERROR = `${PREFIX}//GET_COMMENTS_ERROR`;
 const ADD_COMMENT_REQUESTED = `${PREFIX}//ADD_COMMENT_REQUESTED`;
 const ADD_COMMENT_SUCCESS = `${PREFIX}//ADD_COMMENT_SUCCESS`;
+const DELETE_COMMENT_REQUESTED = `${PREFIX}//DELETE_COMMENT_REQUESTED`;
 const RESET = `${PREFIX}//RESET`;
 
 const commentReducer = (state = initialState, action = {}) => {
@@ -51,6 +52,17 @@ const commentReducer = (state = initialState, action = {}) => {
                 comments: [payload, ...comments],
             };
         }
+        case DELETE_COMMENT_REQUESTED: {
+            const { comments } = state;
+
+            return {
+                ...state,
+                loading: false,
+                comments: comments.filter((commnet) => {
+                    return commnet.id !== payload.comment.id;
+                }),
+            };
+        }
         case RESET:
             return {
                 ...state,
@@ -63,6 +75,7 @@ const commentReducer = (state = initialState, action = {}) => {
 
 export const getCommentsRequested = (slug) => ({ type: GET_COMMENTS_REQUESTED, payload: slug });
 export const addNewComment = () => ({ type: ADD_COMMENT_REQUESTED });
+export const deleteCommentRequested = (payload) => ({ type: DELETE_COMMENT_REQUESTED, payload });
 export const reset = () => ({ type: RESET });
 
 function* getComments({ payload }) {
@@ -82,6 +95,14 @@ function* getComments({ payload }) {
     }
 }
 
+function* deleteComment({ payload: { slug, comment } }) {
+    try {
+        yield call([CommentService, 'deleteComment'], { slug, commentId: comment.id });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 function* addComment() {
     console.log('addComment');
     yield call();
@@ -91,6 +112,7 @@ function* addComment() {
 export function* commentSaga() {
     yield takeLatest(GET_COMMENTS_REQUESTED, getComments);
     yield takeLatest(ADD_COMMENT_REQUESTED, addComment);
+    yield takeLatest(DELETE_COMMENT_REQUESTED, deleteComment);
 }
 
 export default commentReducer;
