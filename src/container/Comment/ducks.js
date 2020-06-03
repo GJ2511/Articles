@@ -6,7 +6,6 @@ const initialState = {
     comments: [],
     loading: false,
     requesting: false,
-    comment: '',
 };
 
 const PREFIX = 'COMMENT';
@@ -75,7 +74,7 @@ const commentReducer = (state = initialState, action = {}) => {
 };
 
 export const getCommentsRequested = (slug) => ({ type: GET_COMMENTS_REQUESTED, payload: slug });
-export const addNewComment = () => ({ type: ADD_COMMENT_REQUESTED });
+export const addCommentRequested = (payload) => ({ type: ADD_COMMENT_REQUESTED, payload });
 export const deleteCommentRequested = (payload) => ({ type: DELETE_COMMENT_REQUESTED, payload });
 export const reset = () => ({ type: RESET });
 
@@ -104,10 +103,17 @@ function* deleteComment({ payload: { slug, comment } }) {
     }
 }
 
-function* addComment() {
-    console.log('addComment');
-    yield call();
-    //dummy for now
+function* addComment({ payload: { slug, comment } }) {
+    try {
+        const response = yield call([CommentService, 'addComment'], { slug, payload: comment });
+
+        yield put({
+            type: ADD_COMMENT_SUCCESS,
+            payload: response.comment,
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export function* commentSaga() {

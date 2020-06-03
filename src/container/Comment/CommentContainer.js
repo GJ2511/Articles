@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Loader from '../../component/Loader';
 import CommentList from '../../component/CommentList';
 import CommentForm from '../../component/CommentForm';
-import { getCommentsRequested, deleteCommentRequested } from './ducks';
+import { getCommentsRequested, deleteCommentRequested, addCommentRequested } from './ducks';
 
 class CommentContainer extends Component {
     componentDidMount() {
@@ -21,8 +21,14 @@ class CommentContainer extends Component {
         deleteCommentRequested({ comment, slug });
     };
 
+    onCommentSubmit = (comment) => {
+        const { slug, addCommentRequested } = this.props;
+
+        addCommentRequested({ comment, slug });
+    };
+
     render() {
-        const { loading, comments, requesting, comment, authenticated, currentUser } = this.props;
+        const { loading, comments, requesting, authenticated, currentUser } = this.props;
 
         if (loading) {
             return (
@@ -46,7 +52,10 @@ class CommentContainer extends Component {
                                             add comments on this article.
                                         </p>
                                     ) : (
-                                        <CommentForm requesting={requesting} comment={comment} />
+                                        <CommentForm
+                                            requesting={requesting}
+                                            handleCommentSubmit={this.onCommentSubmit}
+                                        />
                                     )}
 
                                     <div className="clearfix"></div>
@@ -68,8 +77,8 @@ class CommentContainer extends Component {
 }
 
 CommentContainer.propTypes = {
+    addCommentRequested: PropTypes.func.isRequired,
     authenticated: PropTypes.bool.isRequired,
-    comment: PropTypes.string.isRequired,
     comments: PropTypes.array.isRequired,
     currentUser: PropTypes.object.isRequired,
     deleteCommentRequested: PropTypes.func.isRequired,
@@ -82,7 +91,6 @@ CommentContainer.propTypes = {
 const mapStateToProps = ({ commentReducer, applicationReducer }) => ({
     authenticated: applicationReducer.authenticated,
     currentUser: applicationReducer.currentUser,
-    comment: commentReducer.comment,
     comments: commentReducer.comments,
     loading: commentReducer.loading,
     requesting: commentReducer.requesting,
@@ -91,4 +99,5 @@ const mapStateToProps = ({ commentReducer, applicationReducer }) => ({
 export default connect(mapStateToProps, {
     getCommentsRequested,
     deleteCommentRequested,
+    addCommentRequested,
 })(CommentContainer);
