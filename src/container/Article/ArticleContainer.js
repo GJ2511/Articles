@@ -120,7 +120,7 @@ class ArticleContainer extends Component {
                 </div>
                 <hr />
                 <div className="col-md-12 mt-3">
-                    <CommentContainer slug={slug} owner={this.owner} />
+                    <CommentContainer slug={slug} />
                 </div>
             </div>
         );

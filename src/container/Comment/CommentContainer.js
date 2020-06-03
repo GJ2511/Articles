@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Loader from '../../component/Loader';
 import CommentList from '../../component/CommentList';
+import CommentForm from '../../component/CommentForm';
 import { getCommentsRequested, deleteCommentRequested } from './ducks';
 
 class CommentContainer extends Component {
@@ -20,7 +22,7 @@ class CommentContainer extends Component {
     };
 
     render() {
-        const { loading, comments, owner } = this.props;
+        const { loading, comments, requesting, comment, authenticated, currentUser } = this.props;
 
         if (loading) {
             return (
@@ -38,20 +40,21 @@ class CommentContainer extends Component {
                             <div className="card card-info">
                                 <div className="card-body">
                                     <h5 className="card-title text-center">Comments</h5>
-                                    <textarea
-                                        className="form-control rounded-pill"
-                                        placeholder="write a comment..."
-                                        rows="3"
-                                    ></textarea>
-                                    <br />
-                                    <button type="button" className="btn btn-info float-right rounded-pill">
-                                        Post
-                                    </button>
+                                    {!authenticated ? (
+                                        <p className="col-6 offset-4 mt-3">
+                                            <Link to="/signin">Sign in</Link> or <Link to="/signup">sign up</Link> to
+                                            add comments on this article.
+                                        </p>
+                                    ) : (
+                                        <CommentForm requesting={requesting} comment={comment} />
+                                    )}
+
                                     <div className="clearfix"></div>
                                     <hr />
                                     <CommentList
                                         comments={comments}
-                                        owner={owner}
+                                        authenticated={authenticated}
+                                        currentUser={currentUser}
                                         handleDeleteComment={this.onDeleteComment}
                                     />
                                 </div>
@@ -65,16 +68,21 @@ class CommentContainer extends Component {
 }
 
 CommentContainer.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    comment: PropTypes.string.isRequired,
     comments: PropTypes.array.isRequired,
+    currentUser: PropTypes.object.isRequired,
     deleteCommentRequested: PropTypes.func.isRequired,
     getCommentsRequested: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
-    owner: PropTypes.bool.isRequired,
     requesting: PropTypes.bool.isRequired,
     slug: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ commentReducer }) => ({
+const mapStateToProps = ({ commentReducer, applicationReducer }) => ({
+    authenticated: applicationReducer.authenticated,
+    currentUser: applicationReducer.currentUser,
+    comment: commentReducer.comment,
     comments: commentReducer.comments,
     loading: commentReducer.loading,
     requesting: commentReducer.requesting,

@@ -6,6 +6,7 @@ const initialState = {
     comments: [],
     loading: false,
     requesting: false,
+    comment: '',
 };
 
 const PREFIX = 'COMMENT';

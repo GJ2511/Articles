@@ -67,7 +67,7 @@ function Article({ article, handleDeleteClick, handleEditClick, handleMarkAsFavC
         <>
             <div className="bg-dark text-white p-2">
                 <h2 className="mb-3 px-2">{article.title}</h2>
-                <div className="row">
+                <div className="row px-2">
                     <div className="col-md-7 profile">
                         <ul className="list-unstyled">
                             <li className="media">
@@ -136,7 +136,7 @@ function Article({ article, handleDeleteClick, handleEditClick, handleMarkAsFavC
                     </div>
                 </div>
             </div>
-            <div className="bg-white text-dark mt-2 p-2">
+            <div className="bg-white text-dark mx-3 mb-3 px-2">
                 <p>{article.body}</p>
                 <div>{renderTags(article.tagList)}</div>
             </div>

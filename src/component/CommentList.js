@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-function CommentList({ comments, owner, handleDeleteComment }) {
+function CommentList({ comments, authenticated, handleDeleteComment, currentUser }) {
     const getlist = () => {
         return comments.map((comment, index) => {
+            const showform = authenticated && comment.author.username === currentUser?.username;
+
             return (
                 <li className="media border-light border-bottom p-1" key={index}>
-                    <a href="#" className="float-left">
+                    <a href="#" className="float-left mr-1">
                         <img src={comment.author.image} style={{ height: '50px' }} alt="" className="rounded-circle" />
                     </a>
                     <div className="media-body">
@@ -18,7 +20,7 @@ function CommentList({ comments, owner, handleDeleteComment }) {
                         </span>
                         <strong className="text-success">@{comment.author.username}</strong>
                         <p>{comment.body}</p>
-                        {owner && (
+                        {showform && (
                             <span className="float-right hover-hand" onClick={() => handleDeleteComment(comment)}>
                                 <svg
                                     className="bi bi-trash-fill"
@@ -45,9 +47,10 @@ function CommentList({ comments, owner, handleDeleteComment }) {
 }
 
 CommentList.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
     comments: PropTypes.array.isRequired,
+    currentUser: PropTypes.object.isRequired,
     handleDeleteComment: PropTypes.func.isRequired,
-    owner: PropTypes.bool.isRequired,
 };
 
 export default CommentList;
