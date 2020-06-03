@@ -97,7 +97,7 @@ function ArticleList({ articles, loading, handleRowClick, handleFavCellClick }) 
                     <th className="col-3">Description</th>
                     <th className="col-2">Author</th>
                     <th className="col-2">Tags</th>
-                    <th className="col-1">Favorites Count</th>
+                    <th className="col-1">Favorite Count</th>
                     <th className="col-2">Created At</th>
                 </tr>
             </thead>
