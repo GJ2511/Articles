@@ -42,7 +42,7 @@ function Routes() {
     return (
         <>
             <Switch>
-                <Route path={['/', '/articles']} exact>
+                <Route path={['/', '/articles', '/Articles/']} exact>
                     <ArticleListContainer />
                 </Route>
                 <ProtectedRoute path="/new/article" exact component={CreateArticleContainer} />
