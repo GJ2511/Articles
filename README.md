@@ -36,5 +36,5 @@ To Start Server:
 
 To Visit App:
 
-*Locally: `localhost:3000` 
-*Deployed at: `https://gj2511.github.io/Articles/`
+* Locally: `localhost:3000` 
+* Deployed at: `https://gj2511.github.io/Articles/`
