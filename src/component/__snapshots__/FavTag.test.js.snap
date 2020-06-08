@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FavTag tests /> match snapshot 1`] = `
+Array [
+  <span
+    className="badge ml-1 hover-hand badge-primary"
+    key="0"
+    onClick={[Function]}
+  >
+    reactjs
+  </span>,
+  <span
+    className="badge ml-1 hover-hand badge-secondary"
+    key="1"
+    onClick={[Function]}
+  >
+    angularjs
+  </span>,
+]
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentForm tests /> match snapshot 1`] = `
+<Fragment>
+  <textarea
+    className="form-control rounded-pill"
+    disabled={false}
+    onChange={[Function]}
+    placeholder="write a comment..."
+    rows="3"
+    value=""
+  />
+  <br />
+  <button
+    className="btn btn-info float-right rounded-pill"
+    disabled={true}
+    onClick={[Function]}
+    type="button"
+  >
+    Post
+  </button>
+</Fragment>
+`;

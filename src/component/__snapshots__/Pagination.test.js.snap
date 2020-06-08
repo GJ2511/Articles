@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination tests /> match snapshot 1`] = `
+<nav
+  aria-label="Page navigation"
+  className="table-responsive"
+>
+  <ul
+    className="pagination"
+  >
+    <li
+      className="page-item active"
+      key="0"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        1
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="1"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        2
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="2"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        3
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="3"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        4
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="4"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        5
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="5"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        6
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="6"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        7
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="7"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        8
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="8"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        9
+      </p>
+    </li>
+    <li
+      className="page-item hover-hand"
+      key="9"
+      onClick={[Function]}
+    >
+      <p
+        className="page-link"
+      >
+        10
+      </p>
+    </li>
+  </ul>
+</nav>
+`;

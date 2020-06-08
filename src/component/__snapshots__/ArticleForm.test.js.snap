@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleForm tests /> match snapshot 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-sm-12 col-md-12 col-lg-12 mx-auto mt-5"
+  >
+    <Form
+      noValidate={true}
+    >
+      <div
+        className="form-group"
+      >
+        <Field
+          autoFocus={true}
+          className="form-control rounded-pill"
+          id="title"
+          name="title"
+          placeholder="Article Title"
+          type="text"
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <Field
+          autoFocus={true}
+          className="form-control rounded-pill"
+          id="description"
+          name="description"
+          placeholder="What's this article about"
+          type="text"
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <Field
+          as="textarea"
+          autoFocus={true}
+          className="form-control rounded-pill"
+          id="body"
+          name="body"
+          placeholder="What's this article about"
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <TagFormInput />
+      </div>
+      <div
+        className="form-group offset-md-9"
+      >
+        <button
+          className="btn btn-primary btn-lg btn-block rounded-pill "
+          disabled={false}
+          type="submit"
+        >
+          Publish Article
+        </button>
+      </div>
+    </Form>
+  </div>
+</div>
+`;

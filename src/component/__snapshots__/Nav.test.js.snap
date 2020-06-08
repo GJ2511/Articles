@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Nav tests /> match snapshot 1`] = `
+<nav
+  className="navbar navbar-expand navbar-dark bg-info"
+>
+  <NavLink
+    className="nav-link text-white"
+    exact={true}
+    strict={true}
+    to="/"
+  >
+    Articles Demo Application
+  </NavLink>
+  <button
+    aria-controls="navbarsExample02"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    className="navbar-toggler"
+    data-target="#navbarsExample02"
+    data-toggle="collapse"
+    type="button"
+  >
+    <span
+      className="navbar-toggler-icon"
+    />
+  </button>
+  <div
+    className="collapse navbar-collapse"
+    id="navbarsExample02"
+  >
+    <ul
+      className="navbar-nav ml-auto text-white"
+    >
+      <li
+        className="nav-item"
+      >
+        <NavLink
+          className="nav-link"
+          to="/new/article"
+        >
+          Create New Article
+           
+        </NavLink>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <span
+          className="nav-link"
+          href="#"
+          onClick={[MockFunction]}
+        >
+          Sign Out
+           
+        </span>
+      </li>
+    </ul>
+  </div>
+</nav>
+`;

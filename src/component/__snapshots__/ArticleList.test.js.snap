@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleList tests /> match snapshot 1`] = `
+<table
+  className="table table-hover table-bordered article_list"
+>
+  <thead
+    className="thead-dark"
+  >
+    <tr
+      className="d-flex"
+    >
+      <th
+        className="col-2"
+      >
+        Title
+      </th>
+      <th
+        className="col-3"
+      >
+        Description
+      </th>
+      <th
+        className="col-2"
+      >
+        Author
+      </th>
+      <th
+        className="col-2"
+      >
+        Tags
+      </th>
+      <th
+        className="col-1"
+      >
+        Favorite Count
+      </th>
+      <th
+        className="col-2"
+      >
+        Created At
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      className="d-flex hover-hand"
+      key="0"
+    >
+      <td
+        className="col-2"
+        onClick={[Function]}
+      >
+        How to train your dragon
+      </td>
+      <td
+        className="col-3"
+        onClick={[Function]}
+      >
+        Ever wonder how?
+      </td>
+      <td
+        className="col-2"
+        onClick={[Function]}
+      >
+        jake
+      </td>
+      <td
+        className="col-2"
+        onClick={[Function]}
+      >
+        <span
+          className="badge ml-1 badge-info"
+          key="0"
+        >
+          dragons
+        </span>
+        <span
+          className="badge ml-1 badge-info"
+          key="1"
+        >
+          training
+        </span>
+      </td>
+      <td
+        className="col-1"
+        onClick={[Function]}
+      >
+        <button
+          className="btn rounded-pill text-white badge-secondary"
+          type="button"
+        >
+          <svg
+            className="bi bi-heart"
+            fill="currentColor"
+            height="1em"
+            viewBox="0 0 16 16"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+              fillRule="evenodd"
+            />
+          </svg>
+           
+          <span
+            className="badge badge-light"
+          >
+            0
+          </span>
+        </button>
+      </td>
+      <td
+        className="col-2"
+        onClick={[Function]}
+      >
+        Thursday, February 18th 2016
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

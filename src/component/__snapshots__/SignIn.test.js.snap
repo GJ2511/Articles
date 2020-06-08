@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignIn tests /> match snapshot 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-sm-9 col-md-7 col-lg-5 mx-auto"
+  >
+    <div
+      className="card card-signin my-5 bg-light "
+    >
+      <div
+        className="card-header"
+      >
+        <h5
+          className="card-title text-center"
+        >
+          Sign In
+        </h5>
+      </div>
+      <div
+        className="card-body"
+      >
+        <Form
+          noValidate={true}
+        >
+          <div
+            className="form-group"
+          >
+            <Field
+              aria-describedby="emailHelp"
+              autoFocus={true}
+              className="form-control rounded-pill"
+              id="email"
+              name="email"
+              placeholder="Email address"
+              type="email"
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <Field
+              className="form-control rounded-pill"
+              id="password"
+              name="password"
+              placeholder="Password "
+              type="password"
+            />
+          </div>
+          <button
+            className="btn btn-primary btn-lg btn-block rounded-pill"
+            disabled={false}
+            type="submit"
+          >
+            Login
+          </button>
+        </Form>
+      </div>
+      <div
+        className="card-footer"
+      >
+        Do not have an account? 
+        <Link
+          to="/signup"
+        >
+           Sign Up
+        </Link>
+      </div>
+    </div>
+  </div>
+</div>
+`;

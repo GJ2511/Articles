@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorList tests /> match snapshot 1`] = `
+<div
+  className="alert alert-danger"
+  role="alert"
+>
+  <ul>
+    <li
+      key="0"
+    >
+      <span>
+        ERROR
+         
+        true
+      </span>
+    </li>
+  </ul>
+</div>
+`;
